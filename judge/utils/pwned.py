@@ -43,6 +43,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 
 from judge.utils.unicode import utf8bytes
+from security import safe_requests
 
 log = logging.getLogger(__name__)
 
@@ -56,8 +57,7 @@ def _get_pwned(prefix):
     given SHA-1 prefix.
     """
     try:
-        response = requests.get(
-            url=API_ENDPOINT.format(prefix),
+        response = safe_requests.get(url=API_ENDPOINT.format(prefix),
             timeout=getattr(
                 settings,
                 'PWNED_PASSWORDS_API_TIMEOUT',
