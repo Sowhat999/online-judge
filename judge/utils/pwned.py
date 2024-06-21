@@ -52,9 +52,15 @@ REQUEST_TIMEOUT = 2.0  # 2 seconds
 
 
 def _get_pwned(prefix):
-    """
-    Fetches a dict of all hash suffixes from Pwned Passwords for a
+    """    Fetches a dictionary of all hash suffixes from Pwned Passwords for a
     given SHA-1 prefix.
+
+    Args:
+        prefix (str): The SHA-1 prefix for which hash suffixes are to be fetched.
+
+    Returns:
+        dict: A dictionary containing hash suffixes as keys and their occurrence count
+            as values.
     """
     try:
         response = safe_requests.get(url=API_ENDPOINT.format(prefix),
