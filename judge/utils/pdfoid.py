@@ -13,6 +13,25 @@ PDF_RENDERING_ENABLED = PDFOID_URL is not None
 
 
 def render_pdf(*, title: str, html: str, footer: bool = False) -> bytes:
+    """Render a PDF from HTML content with an optional footer.
+
+    This function sends a POST request to a PDFOID_URL to render a PDF from
+    the provided HTML content. It includes an optional footer if specified
+    in the arguments.
+
+    Args:
+        title (str): The title of the PDF.
+        html (str): The HTML content to be converted to PDF.
+        footer (bool?): Flag to include a footer in the PDF. Defaults to False.
+
+    Returns:
+        bytes: The rendered PDF content as bytes.
+
+    Raises:
+        RuntimeError: If pdfoid is not configured and PDF rendering is not enabled.
+        RuntimeError: If the rendering process fails and returns an error.
+    """
+
     if not PDF_RENDERING_ENABLED:
         raise RuntimeError("pdfoid is not configured, can't render PDFs")
 
