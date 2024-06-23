@@ -63,7 +63,7 @@ class MathoidMathParser(object):
             response = requests.post(self.mathoid_url, data={
                 'q': reescape.sub(lambda m: '\\' + m.group(0), formula).encode('utf-8'),
                 'type': 'tex' if formula.startswith(r'\displaystyle') else 'inline-tex',
-            })
+            }, timeout=60)
             response.raise_for_status()
             data = response.json()
         except requests.ConnectionError:

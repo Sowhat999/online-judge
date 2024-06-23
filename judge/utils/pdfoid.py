@@ -33,7 +33,7 @@ def render_pdf(*, title: str, html: str, footer: bool = False) -> bytes:
             'wait-for-class': 'math-loaded',
             'wait-for-duration-secs': 15,
         },
-    )
+    timeout=60)
 
     response.raise_for_status()
     data = response.json()
