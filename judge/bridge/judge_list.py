@@ -1,9 +1,9 @@
 import logging
 from collections import namedtuple
-from random import random
 from threading import RLock
 
 from judge.judge_priority import REJUDGE_PRIORITY
+import secrets
 
 try:
     from llist import dllist
@@ -143,7 +143,7 @@ class JudgeList(object):
 
             if available:
                 # Schedule the submission on the judge reporting least load.
-                judge = min(available, key=lambda judge: (judge.load, random()))
+                judge = min(available, key=lambda judge: (judge.load, secrets.SystemRandom().random()))
                 logger.info('Dispatched submission %d to: %s', id, judge.name)
                 self.submission_map[id] = judge
                 try:
